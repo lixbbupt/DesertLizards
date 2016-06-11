@@ -43,3 +43,14 @@
  
     ['Day', 'District', 'timeSlot', 'level1', 'level2', 'level3', 'level4']
 
+#### 更新
+
+更新文件
+
+algorithm_regression.py 该文件用回归方法进行预测，#参数未优化
+
+day_timeSlot_to_pridict.txt 该文件存放要求预测的日期及时间片信息
+
+predictResult.csv 该文件存储回归方法的预测结果，格式符合提交要求
+
+
