@@ -12,7 +12,6 @@ import os
 
 #from collections import Counter
 
-fileOrder = '../season_1/training_data/order_data/order_data_2016-01-01'
 fileDir = '../season_1/training_data/order_data'
 clusterMapFile = '../season_1/training_data/cluster_map/cluster_map'
 
