@@ -60,7 +60,7 @@ for i in range(0,len(timeSlot)):
     y_arr = np.array(list(df['orderNum_invalid'])).reshape((66,21))
 
 #############################
-## 此处可尝试不同的回归方法
+## 此处可尝试不同的回归方法，只需更改第一行代码
 ##    
 #    ridge = linear_model.Ridge(alpha=1)
     clf = linear_model.Lasso(alpha=311.3)
@@ -69,7 +69,8 @@ for i in range(0,len(timeSlot)):
         clf.fit(x,y_arr[k])
         BM[i,k,:] = clf.predict(x_pridict)
 #############################
-   
+
+
 predict_list = []
 for i in range(0,len(timeSlot)):
     predict_list = predict_list + BM[i,:,days[i]-22].tolist()
