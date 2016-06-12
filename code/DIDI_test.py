@@ -10,10 +10,10 @@ import numpy as np
 import os
 
 
-fileDir = '../season_1/test_set_1/order_data'
-clusterMapFile = '../season_1/test_set_1/cluster_map/cluster_map'
+fileDir = '../season_2/test_set_2/order_data'
+clusterMapFile = '../season_2/test_set_2/cluster_map/cluster_map'
 
-resultPath = '../testOrderDataProcessed'
+resultPath = '../testOrderDataProcessed2'
 if not os.path.exists(resultPath):
     os.makedirs(resultPath)
 

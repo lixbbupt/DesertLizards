@@ -21,7 +21,7 @@ import os
 
 
 #from collections import Counter
-clusterMapFile = '../season_1/training_data/cluster_map/cluster_map'
+clusterMapFile = '../season_2/training_data/cluster_map/cluster_map'
 cluster_map_df = pd.read_table(clusterMapFile, names=['district_hash', 'district_id'])
 cluster_map_set = set(list(cluster_map_df['district_hash']))
 cluster_map_dict = cluster_map_df.set_index('district_hash').to_dict()
@@ -33,7 +33,7 @@ cluster_map_dict = cluster_map_dict['district_id']
 ##         'price_valid','orderNum_invalid','price_invalid']
 #################
 
-statisticsPerDay_dir = '../trainingOrderDataProcessed'
+statisticsPerDay_dir = '../trainingOrderDataProcessed2'
 namesOrder = ['Day', 'District', 'timeSlot','orderNum_valid','price_valid','orderNum_invalid','price_invalid']
 namesOrder_int = ['Day', 'District', 'timeSlot','orderNum_valid','orderNum_invalid']
 namesOrder_float = ['price_valid','price_invalid']
@@ -73,7 +73,7 @@ df.to_csv('trainingData_order.csv',index=False)
 ## Names = ['Day','timeSlot', 'Weather', 'Temperature', 'PM2.5']
 ##################
 
-weatherData_dir = '../season_1/training_data/weather_data'
+weatherData_dir = '../season_2/training_data/weather_data'
 namesWeather = ['Day','timeSlot', 'Weather', 'Temperature', 'PM2.5']
 Names = ['timeSlot', 'Weather', 'Temperature', 'PM2.5']
 namesWeather_int = ['Day', 'timeSlot']
@@ -119,7 +119,7 @@ df.to_csv('trainingData_weather.csv',index=False)
 ## Names = ['Day', 'District', 'timeSlot', 'level1', 'level2', 'level3', 'level4']
 ##################
 
-trafficData_dir = '../season_1/training_data/traffic_data'
+trafficData_dir = '../season_2/training_data/traffic_data'
 namesTraffic = ['Day', 'District', 'timeSlot', 'level1', 'level2', 'level3', 'level4']
 Names = ['District', 'level1', 'level2', 'level3', 'level4', 'timeSlot']
 namesTraffic_int = ['Day', 'District', 'timeSlot']

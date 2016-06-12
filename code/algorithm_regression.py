@@ -32,7 +32,7 @@ import numpy as np
 
 orderFile_test = './testData_order.csv'
 orderFile_training = './trainingData_order.csv'
-demandInfoFile = './day_timeSlot_to_pridict.txt'
+demandInfoFile = './day_timeSlot_to_pridict2.txt'
 
 namesOrder = ['Day', 'District', 'timeSlot','orderNum_valid','price_valid','orderNum_invalid','price_invalid']
 
@@ -50,20 +50,26 @@ for dayTimeSlot in dayTimeSlots:
     days.append(temp[2])
     timeSlot.append(temp[3])
 
+ALPHA = 20
+K = 0
 
-BM = np.zeros((len(timeSlot),66,9))
+
+BM = np.zeros((len(timeSlot),66,10))
 for i in range(0,len(timeSlot)):
-    df = dfTempOrder_training.loc[dfTempOrder_training['timeSlot'] == timeSlot[i]]
+    df = dfTempOrder_training.loc[dfTempOrder_training['timeSlot'] == timeSlot[i]-K]
     
     x = np.array(range(1,22)).reshape((21,1))
-    x_pridict = np.array(range(22,31)).reshape(9,1)
+    x_pridict = np.array(range(22,32)).reshape(10,1)
     y_arr = np.array(list(df['orderNum_invalid'])).reshape((66,21))
 
 #############################
-## 此处可尝试不同的回归方法，只需更改第一行代码
+## 此处可尝试不同的回归方法，只需更改一行模型的代码
 ##    
-#    ridge = linear_model.Ridge(alpha=1)
-    clf = linear_model.Lasso(alpha=311.3)
+#    clf = linear_model.Ridge(alpha=ALPHA) ## limit； MAPE=2.0 ALPHA = 20000 
+#    clf = linear_model.Lasso(alpha=ALPHA) ## limit； MAPE=2.0 ALPHA = 2000
+    clf = linear_model.LassoLars(alpha=ALPHA) ## limit； MAPE=2.0 ALPHA = 20
+#    clf = linear_model.BayesianRidge(alpha_1=ALPHA,alpha_2=ALPHA) ## limit； MAPE=2.8774 ALPHA = 0.0002
+#    clf = LinearRegression() ## MAPE=3.7188
     for k in range(0,66):
         
         clf.fit(x,y_arr[k])
@@ -74,6 +80,27 @@ for i in range(0,len(timeSlot)):
 predict_list = []
 for i in range(0,len(timeSlot)):
     predict_list = predict_list + BM[i,:,days[i]-22].tolist()
+    
+########################### 模型验证 ######################################
+BM_test = np.zeros((len(timeSlot),66,5))
+for i in range(0,len(timeSlot)):
+    df = dfTempOrder_test.loc[dfTempOrder_test['timeSlot'] == timeSlot[i]-K]
+    y_arr = np.array(list(df['orderNum_invalid'])).reshape((66,5))
+    
+    for k in range(0,66):
+        BM_test[i,k,:] = y_arr[k]
+    
+test_list = []
+for i in range(0,len(timeSlot)):
+    test_list = test_list + list(BM_test[i,:,(days[i]-23)/2])
+    
+test_arr_nonzeros = np.array([item for item in test_list if item!=0])
+predict_arr_valid = np.array([item for i,item in enumerate(predict_list) if test_list[i]!=0])
+MAPE = np.sum(np.absolute(test_arr_nonzeros - predict_arr_valid)/test_arr_nonzeros)/(43*66)
+
+print 'ALPHA=',ALPHA,'K=',K,'MAPE=',MAPE
+#################################################################
+
     
 names = ['District','dayTimeSlot','gapPridict']
 df = pd.DataFrame(columns = names)

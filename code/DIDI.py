@@ -12,10 +12,10 @@ import os
 
 #from collections import Counter
 
-fileDir = '../season_1/training_data/order_data'
-clusterMapFile = '../season_1/training_data/cluster_map/cluster_map'
+fileDir = '../season_2/training_data/order_data'
+clusterMapFile = '../season_2/training_data/cluster_map/cluster_map'
 
-resultPath = '../trainingOrderDataProcessed'
+resultPath = '../trainingOrderDataProcessed2'
 if not os.path.exists(resultPath):
     os.makedirs(resultPath)
 
