@@ -49,9 +49,10 @@ for dayTimeSlot in dayTimeSlots:
     temp = map(int,dayTimeSlot.split('-'))
     days.append(temp[2])
     timeSlot.append(temp[3])
+################################################################
 
-ALPHA = 20
-K = 0
+ALPHA = 20  ## 回归模型的参数
+K = 0 ## K=1,2,3用来测试模型，生成需要的预测结果时设置K=0
 
 
 BM = np.zeros((len(timeSlot),66,10))
