@@ -53,4 +53,10 @@ day_timeSlot_to_pridict.txt 该文件存放要求预测的日期及时间片信�
 
 predictResult.csv 该文件存储回归方法的预测结果，格式符合提交要求
 
+#### 更新 2
 
+algorithm_regression.py 该文件用回归方法进行预测，参数可优化，可计算MAPE
+
+day_timeSlot_to_pridict2.txt 该文件存放要求预测的日期及时间片信息
+
+predictResult.csv 该文件存储回归方法的预测结果，格式符合提交要求
