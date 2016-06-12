@@ -25,7 +25,7 @@ orderNames = ['order_id','driver_id','passenger_id','start_district_hash','dest_
 Names = ['orderNum_valid','price_valid','orderNum_invalid','price_invalid']
 region = set()
 
-def time_to_slot(item): # 将'2016-01-01 09:47:54'转换成对应时间片
+def time_to_slot(item): # 将'2016-01-01 09:47:54'转换成对应的时间片
     l1 = item.split(' ')
     l2 = l1[1].split(':')
     l3 = map(int,l2)
